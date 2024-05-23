@@ -1,0 +1,10 @@
+- Fiquei em dúvida se o \n entraria como uma nova linha 
+  no arquivo de saída ou se seria explicitamente reproduzido 
+  como um caractere literal. Por pensar inicialmente que este
+  devia ser armazenado como caractere literal, adicionei logs 
+  ao programa inteiro.
+- Os logs também ajudaram a passar os valores corretos para a
+  tabela 'compactadora v[32]'. 
+- O programa funciona para a maioria dos casos contanto que os
+  caracteres presentes no arquivo tenham sido inicializados em 
+  'compactadora v[32]' (na main()). 
