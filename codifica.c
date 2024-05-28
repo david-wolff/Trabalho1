@@ -9,13 +9,13 @@ void compacta(FILE *arqTexto, FILE *arqBin, struct compactadora v[]) {
 
     printf("Starting compression...\n");
     while ((ch = fgetc(arqTexto)) != EOF) {
-        printf("Reading char: %c (%d)\n", ch, ch);  
+        printf("Reading char: %c (%d)\n", ch, ch);
         if (ch == '\r') {
             printf("Skipping carriage return.\n");
             continue; 
         }
         found = 0;
-        for (int i = 0; i < 32 && !found; i++) {
+        for (int i = 0; v[i].tamanho != 0 && !found; i++) {
             if (v[i].simbolo == ch) {
                 found = 1;
                 printf("Writing code for %c: ", ch);
@@ -56,7 +56,7 @@ void descompacta(FILE *arqBin, FILE *arqTexto, struct compactadora v[]) {
             buffer = (buffer << 1) | bit;
             bit_count++;
             printf("Bit read: %d (Buffer: %d, Count: %d)\n", bit, buffer, bit_count);
-            for (int i = 0; i < 32; i++) {
+            for (int i = 0; v[i].tamanho != 0; i++) {
                 if (bit_count == v[i].tamanho && buffer == v[i].codigo) {
                     if (v[i].simbolo == '\0') {
                         printf("EOT found, stopping.\n");
@@ -73,5 +73,3 @@ void descompacta(FILE *arqBin, FILE *arqTexto, struct compactadora v[]) {
     }
     printf("Decompression complete.\n");
 }
-
-
